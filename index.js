@@ -138,11 +138,24 @@ import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 import EnrollmentRoutes from './Kambaz/Enrollments/routes.js';
 const app = express();
 
-const FRONTEND_ORIGIN = process.env.NETLIFY_URL || "http://localhost:5173";
-
+// const FRONTEND_ORIGIN = process.env.NETLIFY_URL || "http://localhost:5173";
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://heroic-begonia-5522c8.netlify.app"
+];
 // ✅ Enable CORS for frontend with credentials
+// app.use(cors({
+//   origin: FRONTEND_ORIGIN,
+//   credentials: true
+// }));
 app.use(cors({
-  origin: FRONTEND_ORIGIN,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("❌ CORS: Origin not allowed -> " + origin));
+    }
+  },
   credentials: true
 }));
 
