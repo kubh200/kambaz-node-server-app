@@ -146,7 +146,8 @@ const app = express();
 // const FRONTEND_ORIGIN = process.env.NETLIFY_URL || "http://localhost:5173";
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://heroic-begonia-5522c8.netlify.app"
+  "https://heroic-begonia-5522c8.netlify.app",
+  "https://a6-kambaz-react-web-app-sp25.netlify.app"
 ];
 // ✅ Enable CORS for frontend with credentials
 // app.use(cors({
