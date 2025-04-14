@@ -138,9 +138,20 @@ import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 // import EnrollmentRoutes from './Kambaz/Enrollments/routes.js';
 
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
-mongoose.connect(CONNECTION_STRING);
-
+// const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
+// mongoose.connect(CONNECTION_STRING);
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz";
+mongoose.connect(CONNECTION_STRING, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log("✅ Connected to MongoDB Atlas");
+})
+.catch((err) => {
+  console.error("❌ MongoDB connection error:", err);
+  process.exit(1);
+});
 const app = express();
 
 // const FRONTEND_ORIGIN = process.env.NETLIFY_URL || "http://localhost:5173";
