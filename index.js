@@ -140,7 +140,13 @@ import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 
 // const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
 // mongoose.connect(CONNECTION_STRING);
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz";
+// const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz";
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
+
+if (!CONNECTION_STRING) {
+  console.error("❌ MONGO_CONNECTION_STRING is missing! Check Render env vars.");
+  process.exit(1);
+}
 mongoose.connect(CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
