@@ -28,7 +28,10 @@ export async function findCoursesForUser(userId) {
   console.log("🧠 Fetching enrolled courses for user:", userId);
   const enrollments = await model.find({ user: userId }).populate("course");
   console.log("📚 Enrolled courses found:", enrollments);
-  return enrollments.map((enrollment) => enrollment.course);
+  // Filter out enrollments with null courses and map to course objects
+  return enrollments
+    .filter(enrollment => enrollment.course !== null)
+    .map(enrollment => enrollment.course);
 }
 export async function findUsersForCourse(courseId) {
   const enrollments = await model.find({ course: courseId }).populate("user");
@@ -40,6 +43,11 @@ export function enrollUserInCourse(user, course) {
 }
 export function unenrollUserFromCourse(user, course) {
   return model.deleteOne({ user, course });
+}
+
+// Clean up invalid enrollments (those with null courses)
+export async function cleanupInvalidEnrollments() {
+  return model.deleteMany({ course: null });
 }
  
  

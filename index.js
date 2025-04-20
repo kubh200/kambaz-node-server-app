@@ -9,7 +9,13 @@ import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
+import FolderRoutes from "./Kambaz/Folders/foldersRoutes.js"
+import PostRoutes from './Kambaz/Posts/postsRoutes.js';
+import EnrollmentRoutes from './Kambaz/Enrollments/routes.js';
 // import EnrollmentRoutes from './Kambaz/Enrollments/routes.js';
+import AnswerRoutes from "./Kambaz/Answers/answersRoutes.js";
+import ReplyRoutes from "./Kambaz/Replies/followupReplyRoutes.js";
+import DiscussionRoutes from './Kambaz/Discussion/discussionRoutes.js';
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
 mongoose.connect(CONNECTION_STRING);
@@ -30,6 +36,7 @@ const app = express();
 // const FRONTEND_ORIGIN = process.env.NETLIFY_URL || "http://localhost:5173";
 const allowedOrigins = [
   "http://localhost:5173",
+  "http://localhost:5174",
   "https://heroic-begonia-5522c8.netlify.app",
   "https://a6-kambaz-react-web-app-sp25.netlify.app"
 ];
@@ -83,6 +90,12 @@ Hello(app);
 Lab5(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
+FolderRoutes(app);
+PostRoutes(app);
+EnrollmentRoutes(app);
+AnswerRoutes(app);
+ReplyRoutes(app);
+DiscussionRoutes(app);
 // EnrollmentRoutes(app);
 // ✅ Start server
 const PORT = process.env.PORT || 4000;
